@@ -18,9 +18,9 @@ Make sure docker is install and running. To install docker refer to https://hub.
 
 docker build .
 
-### Run Docker container
+### Run Docker container with interactive mode
 
-docker run -it <image ID> bash
+docker run -it {image ID} bash
 
 ### Get MAC address related details
 
