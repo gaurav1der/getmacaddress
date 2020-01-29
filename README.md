@@ -2,11 +2,9 @@
 
 ## What is getmacaddress? 
 
-getmacaddress is a utility by entering given MAC address, retrieve OUI vendor information, detect virtual machines, possible applications, read the information encoded in the MAC, and get our research's results regarding the MAC address or the OUI.
+getmacaddress is a utility by entering given MAC address user can retrieve OUI vendor information, detect virtual machines, possible applications, read the information encoded in the MAC, and get our research's results regarding the MAC address or the OUI.
 
 ## Deployment
-
-
 
 ### Clone this repo
 
