@@ -22,13 +22,13 @@ docker build .
 
 docker run -it {image ID} bash
 
-### Get MAC address related details
+### Once inside the container to get MAC address related details follow below steps
 
-export API_KEY={YOUR API KEY}
+1) export API_KEY={YOUR API KEY}
 
 To generate API key refer https://macaddress.io/api/documentation/making-requests
 
-export MACADRESS={Sample MAC Address}
+2) export MACADRESS={Sample MAC Address}
 
 Example 44:38:39:ff:ef:57
 
