@@ -7,6 +7,7 @@ jobs:
     docker:
       # specify the version
       - image: circleci/golang:1.9
+      - image: circleci/cci-demo-docker-primary:0.0.2
       #Changes start
       #- setup_remote_docker
 
