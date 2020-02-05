@@ -8,7 +8,7 @@ jobs:
       # specify the version
       - image: circleci/golang:1.9
       #Changes start
-      - setup_remote_docker
+      #- setup_remote_docker
 
       # This should go into custom primary image, here's only for the sake of explanation
       - run:
