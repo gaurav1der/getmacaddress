@@ -1,4 +1,3 @@
-
 # getmacaddress
 
 ## What is getmacaddress? 
