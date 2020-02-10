@@ -4,7 +4,8 @@
 version: 2
 jobs:
  build:
-   machine: true
+   docker:
+     - image: circleci/golang:1.9
    steps:
      - checkout
      # start proprietary DB using private Docker image
