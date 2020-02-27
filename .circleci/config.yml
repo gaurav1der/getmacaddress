@@ -1,26 +1,15 @@
-# Golang CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-go/ for more details
-usage:
-  version: 2.1
-  orbs:
-    anchore: anchore/anchore-engine@1.6.5
-
-  jobs:
-    local_image_scan:
-      executor: anchore/anchore_engine
-      steps:
-        - setup_remote_docker
-        - checkout
-        - run:
-            name: build container
-            command: docker build -t gaurav1der/macaddr:latest .
-        - anchore/analyze_local_image:
-            image_name: gaurav1der/macaddr:latest
-            timeout: '500'
-            policy_failure: True
-            policy_bundle_file_path: .circleci/.anchore/policy_bundle.json
-            dockerfile_path: ./Dockerfile
-        - anchore/parse_reports
-        - store_artifacts:
-            path: anchore-reports
+version: 2.1
+orbs:
+  anchore: anchore/anchore-engine@1.0.0
+jobs:
+  local_image_scan:
+    executor: anchore/anchore_engine
+    steps:
+      - checkout
+      - run:
+          name: build container
+          command: docker build -t gaurav1der/macaddress .
+      - anchore/analyze_local_image:
+          image_name: gaurav1der/macaddress
+          timeout: '500'
+          analysis_fail: True
