@@ -8,8 +8,8 @@ jobs:
       - checkout
       - run:
           name: build container
-          command: docker build -t gaurav1der/macaddress .
+          command: docker build -t gaurav1der/macaddress:ci .
       - anchore/analyze_local_image:
-          image_name: gaurav1der/macaddress
+          image_name: gaurav1der/macaddress:ci
           timeout: '500'
           analysis_fail: True
