@@ -5,6 +5,7 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.9
+jobs:
   local_image_scan:
     executor: anchore/anchore_engine
     steps:
