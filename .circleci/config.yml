@@ -2,6 +2,9 @@ version: 2.1
 orbs:
   anchore: anchore/anchore-engine@1.0.0
 jobs:
+  build:
+   docker:
+     - image: circleci/golang:1.9
   local_image_scan:
     executor: anchore/anchore_engine
     steps:
