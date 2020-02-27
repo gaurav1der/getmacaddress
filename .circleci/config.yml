@@ -2,18 +2,14 @@ version: 2.1
 orbs:
   anchore: anchore/anchore-engine@1.0.0
 jobs:
-  build:
-    docker:
-      - image: circleci/golang:1.9
-jobs:
   local_image_scan:
     executor: anchore/anchore_engine
     steps:
       - checkout
       - run:
           name: build container
-          command: docker build -t gaurav1der/macaddress:ci .
+          command: docker build -t gaurav1der/macadddr .
       - anchore/analyze_local_image:
-          image_name: gaurav1der/macaddress:ci
+          image_name: gaurav1der/macadddr
           timeout: '500'
           analysis_fail: True
