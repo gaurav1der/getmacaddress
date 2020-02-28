@@ -1,6 +1,3 @@
-version: 2.1
-orbs:
-  anchore: anchore/anchore-engine@1.0.0
 jobs:
   local_image_scan:
     executor: anchore/anchore_engine
