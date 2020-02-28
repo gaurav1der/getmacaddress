@@ -2,25 +2,23 @@ version: 2.1
 orbs:
   anchore: anchore/anchore-engine@1.0.0
 jobs:
- build:
-   docker:
-     - image: circleci/golang:1.9
-   steps:
-     - checkout
-     - setup_remote_docker:
-          docker_layer_caching: false
-     # start proprietary DB using private Docker image
-     # with credentials stored in the UI
-     #- run: |
-     #echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-    # docker run -d --name db company/proprietary-db:1.2.3
-
-     # build the application image
-     - run: docker build -t gagoel/macaddr:latest .
   local_image_scan:
     executor: anchore/anchore_engine
     steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          command: 'docker build -t "example/test:latest" .'
+          name: build container
       - anchore/analyze_local_image:
-          image_name: gagoel/macaddr:latest
+          dockerfile_path: ./Dockerfile
+          image_name: 'example/test:latest'
+          policy_bundle_file_path: .circleci/.anchore/policy_bundle.json
+          policy_failure: true
           timeout: '500'
-          analysis_fail: True
+      - anchore/parse_reports
+      - store_artifacts:
+          path: anchore-reports
+orbs:
+  anchore: anchore/anchore-engine@1.6.5
+version: 2.1
