@@ -6,7 +6,7 @@ jobs:
  build:
    docker:
      - image: circleci/golang:1.9
-     - image: 'docker:stable-git'
+     - image: docker:stable-git
    environment:
      ANCHORE_VERSION: v0.6.1
    steps:
