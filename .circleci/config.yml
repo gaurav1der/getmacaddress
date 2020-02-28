@@ -6,6 +6,9 @@ jobs:
  build:
    docker:
      - image: circleci/golang:1.9
+     - image: 'docker:stable-git'
+   environment:
+     ANCHORE_VERSION: v0.6.1
    steps:
      - checkout
      - setup_remote_docker:
@@ -21,11 +24,23 @@ jobs:
 
      # deploy the image
     # - run: docker push company/app:$CIRCLE_BRANCH
+jobs:
+  local_image_scan:
+    executor: anchore/anchore_engine
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          command: 'docker build -t "example/test:latest" .'
+          name: build container
+      - anchore/analyze_local_image:
+          dockerfile_path: ./Dockerfile
+          image_name: 'example/test:latest'
+          policy_bundle_file_path: .circleci/.anchore/policy_bundle.json
+          policy_failure: true
+          timeout: '500'
+      - anchore/parse_reports
+      - store_artifacts:
+          path: anchore-reports
 orbs:
-  anchore-engine: anchore/anchore-engine@1.0.0
-workflows:
-  scan_image:
-    jobs:
-      - anchore/image_scan:
-          image_name: anchore/anchore-engine:latest
-          timeout: '300'
+  anchore: anchore/anchore-engine@1.6.5
